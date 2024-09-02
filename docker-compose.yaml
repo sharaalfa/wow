@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    image: wow-server:latest
+    container_name: wow-server
+    ports:
+      - "12345:12345"
+    networks:
+      - wow-network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    image: wow-client:latest
+    container_name: wow-client
+    networks:
+      - wow-network
+
+networks:
+  wow-network:
+    name: wow-network
