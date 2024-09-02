@@ -1,0 +1,9 @@
+server:
+      host: wow-server #127.0.0.1
+      port: 12345
+difficulty: 5
+timeout: 10
+quotes:
+      entry:
+         point: "https://api.quotable.io/random"
+      maxRetries: 3

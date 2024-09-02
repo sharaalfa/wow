@@ -1,0 +1,17 @@
+FROM golang:1.23-alpine
+
+ADD . /app
+
+ADD /pkg/config/*.go /pkg/config/
+ADD /pkg/generator/*.go /pkg/generator/
+ADD /config/*.yaml /config/
+ADD /client/*.go /app
+
+WORKDIR /app
+
+RUN go mod download
+
+RUN go build -o main .
+
+# Запускаем приложение
+CMD ["./main"]

@@ -1,0 +1,19 @@
+FROM golang:1.23-alpine AS builder
+
+
+ADD . /app
+ADD /server/app/*.go /server/internal/app/
+ADD /server/internal/services/generator/*.go /server/internal/services/generator/
+ADD /server/internal/services/handler/*.go /server/internal/services/handler/
+ADD /server/internal/services/verifier/*.go /server/internal/services/verifier/
+ADD /pkg/config/*.go /pkg/config/
+ADD /config/*.yaml /config/
+ADD /server/cmd/*.go /app
+WORKDIR /app
+RUN go mod download
+RUN go build -o main .
+
+EXPOSE 12345
+
+# Запускаем приложение
+CMD ["./main"]
